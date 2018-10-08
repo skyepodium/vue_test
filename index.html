@@ -3,20 +3,28 @@
 
 
 <div id="app">
-    <div> {{ message }} </div>
+    <input type="text" v-model="amount">
+    <div v-if="amount > 10000">
+        골드
+    </div>
+    <div v-else-if="amount > 5000">
+        실버
+    </div>
+    <div v-else>
+        브론즈
+    </div>
 </div>
 
 
 <script>
-    var model = {
-        message : '<li>안녕하세요</li>'
-    };
-
     var vm = new Vue({
         el: '#app',
-        data: model,
+        data: {
+            amount : 0,
+        }
     })
 </script>
+
 
 <style>
     #app div {
@@ -26,6 +34,20 @@
         font-size: 40px;
         margin-top: 40px;
         font-weight:bold;
+    }
+
+    #app input{
+        width: 600px;
+        height: 50px;
+        text-align: left;
+        font-size: 40px;
+    }
+
+    #app button{
+        width: 600px;
+        height: 50px;
+        text-align: left;
+        font-size: 40px;
     }
 
     #app #asdfa {
