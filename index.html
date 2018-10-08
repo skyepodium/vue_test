@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue"></script>
+
+
+<div id="app">
+    <div> {{ message }} </div>
+</div>
+
+
+<script>
+    var model = {
+        message : '<li>안녕하세요</li>'
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        data: model,
+    })
+</script>
+
+<style>
+    #app div {
+        display: block;
+        width: 600px;
+        height: 50px;
+        font-size: 40px;
+        margin-top: 40px;
+        font-weight:bold;
+    }
+
+    #app #asdfa {
+        display: block;
+        width: 300px;
+        height: 50px;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+
+</style>
