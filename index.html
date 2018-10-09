@@ -3,25 +3,37 @@
 
 
 <div id="app">
-    <input type="text" v-model="amount">
-    <div v-if="amount > 10000">
-        골드
-    </div>
-    <div v-else-if="amount > 5000">
-        실버
-    </div>
-    <div v-else>
-        브론즈
+    <div>
+        {{ message }}
     </div>
 </div>
 
 
 <script>
+
+    var model = {
+        message: '안녕하세요'
+    }
+
     var vm = new Vue({
         el: '#app',
-        data: {
-            amount : 0,
+        data: model,
+        
+        beforeCreate: function() {
+            console.log('beforeCreate');
+        },
+        created: function() {
+            console.log('created');
+        },
+        mounted: function() {
+            console.log('mounted');
+            this.message = '안녕 하이루~찡긋'
+        },
+        updated: function() {
+            console.log('updated');
         }
+
+
     })
 </script>
 
