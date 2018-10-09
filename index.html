@@ -3,8 +3,8 @@
 
 
 <div id="app">
-    <div>
-        {{ message }}
+    <div v-for="person in IZONE"  v-if="person.name.indexOf('미') > -1">
+        {{ person.name }}, '미'위 위치는 : {{ person.name.indexOf('미') }}
     </div>
 </div>
 
@@ -12,37 +12,35 @@
 <script>
 
     var model = {
-        message: '안녕하세요'
-    }
+        IZONE: [
+            {name: '권은비'},
+            {name: '미야와키 사쿠라'},
+            {name: '강혜원'},
+            {name: '최예나'},
+            {name: '이채연'},
+            {name: '김채원'},
+            {name: '김민주'},
+            {name: '야부키 나코'},
+            {name: '혼다 히토미'},
+            {name: '조유리'},
+            {name: '안유진'},
+            {name: '장원영'},
+        ],
+    };
 
     var vm = new Vue({
         el: '#app',
         data: model,
-        
-        beforeCreate: function() {
-            console.log('beforeCreate');
-        },
-        created: function() {
-            console.log('created');
-        },
-        mounted: function() {
-            console.log('mounted');
-            this.message = '안녕 하이루~찡긋'
-        },
-        updated: function() {
-            console.log('updated');
-        }
-
-
-    })
+    });
 </script>
 
-
 <style>
+    #app img{
+        display:block;
+        width:60px;
+    }
     #app div {
         display: block;
-        width: 600px;
-        height: 50px;
         font-size: 40px;
         margin-top: 40px;
         font-weight:bold;
