@@ -3,9 +3,8 @@
 
 
 <div id="app">
-    <input v-model="currentTitle" v-on:keyUp.ctrl.83="saveBook" type="text">
-    <div v-for="book in bookList">
-        {{ book.title }}
+    <div id="block" v-bind:style="{ left: left + 'px', top: top + 'px' }">
+
     </div>
 </div>
 
@@ -13,27 +12,64 @@
 <script>
 
     var model = {
-        currentTitle: '',
-        bookList: [
-            {title: '용의자 x의 헌신'},
-            {title: '악의'},
-            {title: '라플라스의 마녀'},
-        ],
+        message: '안녕하세요',
+        left:0,
+        top:0,
     };
 
     var vm = new Vue({
         el: '#app',
         data: model,
+        created: function() {
+            window.document.addEventListener('keyup', this.control);
+        },
         methods: {
-            saveBook: function() {
-                this.bookList.push({title: this.currentTitle });
-                this.currentTitle = null;
+            moveLeft: function() {
+                this.left = this.left - 50;
+            },
+            moveRight: function(){
+                this.left = this.left + 50;
+            },
+            moveUp: function(){
+                this.top = this.top - 50;
+            },
+            moveDown: function() {
+                this.top = this.top + 50;
+            },
+            control: function(e){
+                const keyCode = e.keyCode;
+
+                if(keyCode === 38){
+                    console.log('up');
+                    this.moveUp();
+                }
+                else if(keyCode === 37){
+                    console.log('left');
+                    this.moveLeft();
+                }
+                else if(keyCode === 39){
+                    console.log('right');
+                    this.moveRight();
+                }
+                else if(keyCode === 40){
+                    console.log('down');
+                    this.moveDown();
+                }
+
             }
         }
     });
 </script>
 
 <style>
+    #app #block{
+        width:50px;
+        height:50px;
+        background-color:aqua;
+        position: absolute;
+        left:0px;
+        top:0px;
+    }
     #app img{
         display:block;
         width:60px;
