@@ -3,9 +3,12 @@
 
 
 <div id="app">
-    <input v-bind:value="curInput" @input="nameChanged" type="text" placeholder="나라 이름을 입력해보세요">
-    <div v-for="item in filtered()">
-        {{ item.name }}
+    <input v-model="num" type="text">
+    <div>
+        {{ methodsSum() }}
+    </div>
+    <div>
+        {{ computedSum }}
     </div>
 </div>
 
@@ -13,33 +16,24 @@
 <script>
 
     var model = {
-        curInput: '',
-        countries: [
-            {name: '한국'},
-            {name: '중국'},
-            {name: '대만'},
-            {name: '러시아'},
-            {name: '이탈리아'},
-            {name: '일본'},
-            {name: '미국'},
-            {name: '스페인'},
-            {name: '이란'},
-        ]
+        num: 0,
     }
   
     var vm = new Vue({
         el:'#app',
         data: model,
         methods: {
-            filtered: function() {
-                var name = this.curInput.trim();
-
-                return this.countries.filter(function(item){
-                    if(item.name.indexOf(name) > -1) return true;
-                })
-            },
-            nameChanged: function(e) {
-                this.curInput = e.target.value;
+            methodsSum: function() {
+                console.log('methods');
+                var n = Number(this.num);
+                return n * (n+1) / 2;
+            }
+        },
+        computed: {
+            computedSum: function() {
+                console.log('computed');
+                var n = Number(this.num);
+                return n * (n+1) / 2;
             }
         }
     })
