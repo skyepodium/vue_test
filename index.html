@@ -3,8 +3,9 @@
 
 
 <div id="app">
-    <div id="block" v-bind:style="{ left: left + 'px', top: top + 'px' }">
-
+    <input v-bind:value="curInput" @input="nameChanged" type="text" placeholder="나라 이름을 입력해보세요">
+    <div v-for="item in filtered()">
+        {{ item.name }}
     </div>
 </div>
 
@@ -12,94 +13,49 @@
 <script>
 
     var model = {
-        message: '안녕하세요',
-        left:0,
-        top:0,
-    };
-
+        curInput: '',
+        countries: [
+            {name: '한국'},
+            {name: '중국'},
+            {name: '대만'},
+            {name: '러시아'},
+            {name: '이탈리아'},
+            {name: '일본'},
+            {name: '미국'},
+            {name: '스페인'},
+            {name: '이란'},
+        ]
+    }
+  
     var vm = new Vue({
-        el: '#app',
+        el:'#app',
         data: model,
-        created: function() {
-            window.document.addEventListener('keyup', this.control);
-        },
         methods: {
-            moveLeft: function() {
-                this.left = this.left - 50;
-            },
-            moveRight: function(){
-                this.left = this.left + 50;
-            },
-            moveUp: function(){
-                this.top = this.top - 50;
-            },
-            moveDown: function() {
-                this.top = this.top + 50;
-            },
-            control: function(e){
-                const keyCode = e.keyCode;
+            filtered: function() {
+                var name = this.curInput.trim();
 
-                if(keyCode === 38){
-                    console.log('up');
-                    this.moveUp();
-                }
-                else if(keyCode === 37){
-                    console.log('left');
-                    this.moveLeft();
-                }
-                else if(keyCode === 39){
-                    console.log('right');
-                    this.moveRight();
-                }
-                else if(keyCode === 40){
-                    console.log('down');
-                    this.moveDown();
-                }
-
+                return this.countries.filter(function(item){
+                    if(item.name.indexOf(name) > -1) return true;
+                })
+            },
+            nameChanged: function(e) {
+                this.curInput = e.target.value;
             }
         }
-    });
+    })
+
 </script>
 
 <style>
-    #app #block{
-        width:50px;
-        height:50px;
-        background-color:aqua;
-        position: absolute;
-        left:0px;
-        top:0px;
-    }
-    #app img{
-        display:block;
-        width:60px;
-    }
-    #app div {
-        display: block;
-        font-size: 40px;
-        margin-top: 20px;
-        font-weight:bold;
-    }
-
     #app input{
-        width: 600px;
-        height: 50px;
-        text-align: left;
-        font-size: 40px;
-    }
-
-    #app button{
-        height: 50px;
-        text-align: left;
-        font-size: 40px;
-    }
-
-    #app #asdfa {
-        display: block;
         width: 300px;
         height: 50px;
         font-size: 20px;
-        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #app div{
+        font-size:20px;
+        margin-bottom: 10px;
     }
 
 
